@@ -27,40 +27,40 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public String displayUsers(ModelMap model) {
+    public String listUsers(ModelMap model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping(value = "/add")
-    public String getAddUserForm(ModelMap model) {
+    public String showAddUserForm(ModelMap model) {
         model.addAttribute("user", new User());
         return "add";
     }
 
     @PostMapping("/users")
-    public String addUser(@ModelAttribute("user") User user) {
-        userService.addUser(user);
+    public String createUser(@ModelAttribute("user") User user) {
+        userService.createUser(user);
         return "redirect:/users";
     }
 
     @PostMapping("/remove")
-    public String removeUser(@RequestParam("id") int id) {
-        userService.removeUserById(id);
+    public String deleteUserById(@RequestParam("id") int id) {
+        userService.deleteUserById(id);
         return "redirect:/users";
     }
 
     @PostMapping("/edit")
-    public String getEditUserForm(@RequestParam("id") int id, ModelMap model) {
+    public String showEditUserForm(@RequestParam("id") int id, ModelMap model) {
         User user = userService.find(id);
         model.addAttribute("user", user);
         return "/edit";
     }
 
     @PostMapping("/update")
-    public String saveEditedUser(@ModelAttribute("user") User user) {
-        userService.editUser(user);
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/users";
     }
 

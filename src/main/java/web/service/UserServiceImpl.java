@@ -22,21 +22,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public void createUser(User user) {
+        userDao.createUser(user);
     }
 
     @Transactional
-    public void removeUserById(int id) {
-        userDao.removeUserById(id);
+    public void deleteUserById(int id) {
+        userDao.deleteUserById(id);
     }
 
     @Transactional
-    public void editUser(User user) {
-        userDao.editUser(user);
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public User find(int id) {
         return userDao.find(id);
     }

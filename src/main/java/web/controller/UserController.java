@@ -22,25 +22,25 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String redirectToUsers() {
         return "redirect:/users";
     }
 
     @GetMapping(value = "/users")
-    public String getAllUsers(ModelMap model) {
+    public String displayUsers(ModelMap model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping(value = "/add")
-    public String addUser(ModelMap model) {
+    public String getAddUserForm(ModelMap model) {
         model.addAttribute("user", new User());
         return "add";
     }
 
     @PostMapping("/users")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String editUser(@RequestParam("id") int id, ModelMap model) {
+    public String getEditUserForm(@RequestParam("id") int id, ModelMap model) {
         User user = userService.find(id);
         model.addAttribute("user", user);
         return "/edit";

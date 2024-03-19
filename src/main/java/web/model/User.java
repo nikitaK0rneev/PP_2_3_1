@@ -14,14 +14,14 @@ public class User implements Comparable<User> {
     @Column(name = "age")
     private int age;
 
+    public User() {
+
+    }
+
     public User(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
-    }
-
-    public User() {
-
     }
 
     public int getId() {
@@ -32,12 +32,25 @@ public class User implements Comparable<User> {
         this.id = id;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
 
     public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return Integer.compare(this.id, o.id);
     }
 
     @Override
@@ -62,16 +75,4 @@ public class User implements Comparable<User> {
         return Objects.hash(getId(), getName(), getAge());
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public int compareTo(User o) {
-        return Integer.compare(this.id, o.id);
-    }
 }
